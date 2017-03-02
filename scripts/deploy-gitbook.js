@@ -9,4 +9,4 @@ var contenido = fs.readFileSync("./package.json");
 var configuracion = JSON.parse(contenido);
 
 
-ghpages.publish('./gh-pages', { repo: configuracion.repository.url, logger: function(m) { console.error(m); } });
+ghpages.publish('./public', { repo: configuracion.repository.url, logger: function(m) { console.error(m); } });
