@@ -13,7 +13,7 @@ var async = require('async');
 main();
 
 function main() {
-    var input = './txt';
+    var input = './docs';
     var output = './wiki';
 
     fs.mkdir(output, function() {
@@ -58,7 +58,7 @@ function generateSidebar(config, cb) {
         encoding: 'utf8'
     });
 
-    data = data.replace(/.md/g, '');
+    //data = data.replace(/.md/g, '');
 
     fs.writeFile(config.output, data, cb);
 }

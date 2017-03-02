@@ -1,5 +1,5 @@
 {
-  "name": "Rutas de Express",
+  "name": "RutasExpress",
   "version": "0.0.1",
   "description": "Apuntes de las rutas de Express",
   "main": "index.js",
@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ULL-ESIT-PL-1617/estudiar-las-rutas-en-expressjs-angel-oscar-norberto",
+    "url": "https://github.com/ULL-ESIT-PL-1617/estudiar-las-rutas-en-expressjs-angel-oscar-norberto.git",
     "wiki": "https://git.gitbook.com/alu0100825893/express.git"
   },
   "keywords": [
