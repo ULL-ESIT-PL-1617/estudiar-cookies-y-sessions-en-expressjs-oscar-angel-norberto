@@ -5,7 +5,7 @@ var Q = require('q');
 var exec = require('child_process').exec;
 
 gulp.task('build', function(){
-	var book = new gitbook.Book('./docs',{
+	var book = new gitbook.Book('./public',{
 		config:{
 			output:'./_book'
 		}
@@ -17,7 +17,7 @@ gulp.task('build', function(){
 });
 
 gulp.task('deploy', function(){
-	return gulp.src('./docs/**/*')
+	return gulp.src('./public/**/*')
 		.pipe(ghPages())
 
 });
