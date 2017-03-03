@@ -4,11 +4,11 @@ Una aplicación de Express es básicamente una serie de llamadas a funciones mid
 Para llamar a otra función middleware se llama a `next()` para pasarle el control a la siguiente función en la pila. Todas las funciones middleware han de llamar a `next()` o terminar el ciclo petición-respuesta (con un `send()` por ejemplo), si no lo hacen se quedaría la petición desatendida.
 
 Hay distions tipos de middleware:
--[Middleware a nivel de aplicación](#Aplication-level)
--[Middleware a nivel de enrutamiento](#Router-level)
--[Middleware de manejo de errores](#Error-handling)
--[Middleware preconstruido](#Built-in)
--[Middleware de terceros](#Third-party)
+ - [Middleware a nivel de aplicación](#Aplication-level)
+ - [Middleware a nivel de enrutamiento](#Router-level)
+ - [Middleware de manejo de errores](#Error-handling)
+ - [Middleware preconstruido](#Built-in)
+ - [Middleware de terceros](#Third-party)
 
 ##Middleware a nivel de aplicación.
 <a name="Aplication-level"></a>
@@ -75,7 +75,7 @@ También es importante destacar que en lugar de `next('route')` se emplea `next(
 
 
 ##Middleware de manejo de errores
-<a name="Error-Handling"></a>
+<a name="Error-handling"></a>
 
 Lo que diferencia a los middldeware de manejo de errores del resto es que se llaman con cuatro argumentos en lugar de con tres: (err, req, res, next)
 
