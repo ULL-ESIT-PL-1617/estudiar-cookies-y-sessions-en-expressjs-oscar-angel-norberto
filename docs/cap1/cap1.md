@@ -12,4 +12,11 @@ Routng se refiere a determinar cómo una aplicación responde a una solicitud de
   - PATH es una vía de acceso en el servidor.
   - HANDLER es la función que se ejecuta cuando se correlaciona la ruta.
 
-  
+  ```.js
+  var express = require('express');
+  var app = express();
+
+  app.get('/',function (req, res) {
+    res.send('Hello World!');
+  });
+  ```
