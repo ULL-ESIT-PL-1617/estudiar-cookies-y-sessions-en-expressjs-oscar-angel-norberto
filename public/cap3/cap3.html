@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Capitulo 3: CAP3 · GitBook</title>
+        <title>Capitulo 3: Middleware · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.2">
@@ -56,6 +56,8 @@
     <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
+    
+    <link rel="next" href="../cap4/cap4.html" />
     
     
     <link rel="prev" href="../cap2/cap2.html" />
@@ -131,7 +133,20 @@
                 <a href="cap3.html">
             
                     
-                    Capitulo 3: CAP3
+                    Capitulo 3: Middleware
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../cap4/cap4.html">
+            
+                <a href="../cap4/cap4.html">
+            
+                    
+                    Capitulo 4: Router API
             
                 </a>
             
@@ -169,7 +184,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Capitulo 3: CAP3</a>
+        <a href=".." >Capitulo 3: Middleware</a>
     </h1>
 </div>
 
@@ -184,8 +199,91 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <p>CAP 3</p>
+                                <h1 id="middleware">Middleware</h1>
+<p>Una aplicaci&#xF3;n de Express es b&#xE1;sicamente una serie de llamadas a funciones middleware. Estas funciones tienen acceso al request object y al response object, y pueden modificarlos a dem&#xE1;s de realizar otras funcones, como ejecutar c&#xF3;digo o llamar a otras funciones middleware.
+Para llamar a otra funci&#xF3;n middleware se llama a <code>next()</code> para pasarle el control a la siguiente funci&#xF3;n en la pila. Todas las funciones middleware han de llamar a <code>next()</code> o terminar el ciclo petici&#xF3;n-respuesta (con un <code>send()</code> por ejemplo), si no lo hacen se quedar&#xED;a la petici&#xF3;n desatendida.</p>
+<p>Hay distions tipos de middleware:
+-<a href="#Aplication-level">Middleware a nivel de aplicaci&#xF3;n</a>
+-<a href="#Router-level">Middleware a nivel de enrutamiento</a>
+-<a href="#Error-handling">Middleware de manejo de errores</a>
+-<a href="#Built-in">Middleware preconstruido</a>
+-<a href="#Third-party">Middleware de terceros</a></p>
+<h2 id="middleware-a-nivel-de-aplicaci&#xF3;n">Middleware a nivel de aplicaci&#xF3;n.</h2>
+<p><a name="Aplication-level"></a></p>
+<p>Para utilizar un middleware de nivel de aplicaci&#xF3;n llamando a <code>app.use()</code> o <code>app.METHOD()</code> siendo METHOD alguno de los metodos HTTP que que es capaz de soportar, tales como GET, PUT o POST.
+    var app = express()</p>
+<pre><code>//una funci&#xF3;n sin una ruta se ejecuta siempre que la app reciva una petici&#xF3;n
+app.use(function (req, res, next) {
+  console.log(&apos;Time:&apos;, Date.now())
+  next()
+})
 
+//esta funci&#xF3;n se ejecuta cuando /user/:id recibe una petici&#xF3;n
+app.use(&apos;/user/:id&apos;, function(req, res, next){
+  console.log(&apos;Request type:&apos;, req.method)
+  next()
+})
+
+//esta solo se ejecuta cuando /user/:id recibe una petici&#xF3;n con el m&#xE9;todo GET
+app.get(&apos;/user/:id&apos;, function(req, res, next){
+res.send(&apos;USER&apos;)
+})
+</code></pre><p>Como vemos, habr&#xE1; ocasiones en las que las tres funcionen se quieran ejecutar simultaneamente. Para esto se emplea en <code>next()</code>, el cual pasa el control a la siguiente funci&#xF3;n que quiera ejecutarse. Tambi&#xE9;n se pueden cargar multiples funciones middleware con una sola llamada:</p>
+<pre><code>app.use(&apos;user/:id&apos;,function (req, res, next) {
+  console.log(&apos;Request URL:&apos;, req.originalUrl)
+  next()
+}, function (req, res, next) {
+  res.send (&apos;User info&apos;)
+})
+</code></pre><p>   app.get(&apos;/user/:id&apos;, function(req, res, next) {
+     res.end(req.params.id)
+   })</p>
+<p>En el ejemplo anterior, hay dos respuestas para GET, pero la segunda nunca se ejecuta, ya que la segunda funci&#xF3;n de la primera rompe el ciclo de petici&#xF3;n-respuesta con un <code>send()</code>. Para saltanos parte de la pila de llamadas y ceder el control directamente a otra ruta se utiliza <code>next(&apos;route&apos;)</code>. Este <code>next(&apos;route&apos;)</code> s&#xF3;lo puede ser llamado por middleware que ha sido cargado con <code>app.METHOD()</code> o con <code>router.METHOD()</code>.</p>
+<pre><code>app.get(&apos;/user/:id&apos;, function(req, res, next){
+  //si la ID del usuario es 0, se pasa a la siguiente ruta
+  if(req.params.id === &apos;0&apos;) next(&apos;route&apos;)
+  //en otro caso sigue en la misma ruta
+  else next()
+}, function (req, res, next){
+  res.render(&apos;regular&apos;)
+})
+
+//esta solo se ejecuta cuando se le pasa el control con next(&apos;route&apos;)
+app.get(&apos;/user/:id&apos;, function (req, res, next){
+  res.render(&apos;special&apos;)
+}
+</code></pre><h2 id="middleware-a-nivel-de-enrutamiento">Middleware a nivel de enrutamiento</h2>
+<p><a name="Router-level"></a></p>
+<p>El middleware a nivel de enrutamiento funciona de la misma manera que el de nivel de aplicaci&#xF3;n, excepto que es una instancia de <code>express.Router</code>. En el resto de aspectos funciona de manera similar.</p>
+<pre><code>var app = express()
+var router = express.Router()
+</code></pre><p>Tambi&#xE9;n es importante destacar que en lugar de <code>next(&apos;route&apos;)</code> se emplea <code>next(&apos;router&apos;)</code> trabajando con middleware a nivel de enrutamiento.</p>
+<h2 id="middleware-de-manejo-de-errores">Middleware de manejo de errores</h2>
+<p><a name="Error-Handling"></a></p>
+<p>Lo que diferencia a los middldeware de manejo de errores del resto es que se llaman con cuatro argumentos en lugar de con tres: (err, req, res, next)</p>
+<pre><code>app.use(function (err, req, res, next) {
+  console.error(err.stack)
+  res.status(500).send(&apos;Something broke!&apos;)
+})
+</code></pre><h2 id="middleware-preconstruido">Middleware preconstruido</h2>
+<p><a name="Built-in"></a></p>
+<p>Express tiene una serie de m&#xF3;dulos separados con funciones middleware preconstruidas. A pesar de eso, express incluye <code>express.static</code> que permite enviar assets estaticos tales como p&#xE1;ginas html o im&#xE1;genes.</p>
+<pre><code>express.static(root, [options])
+</code></pre><p>El argumento root indica el directorio ra&#xED;z desde el que se cargar&#xE1;n los assets. Options es un argumento opcional que se puede extender mucho, para m&#xE1;s detalle consultar (express.static)[<a href="http://expressjs.com/en/4x/api.html#express.static" target="_blank">http://expressjs.com/en/4x/api.html#express.static</a>).
+Puede haber m&#xE1;s de un <code>express.static()</code> por app.</p>
+<h2 id="middleware-de-terceros">Middleware de terceros</h2>
+<p><a name="Third-party"></a></p>
+<p>Puede instalarse software de terceros que incluya sus propias funciones middleware para a&#xF1;adirle funcionalidades a express.</p>
+<pre><code>//aqu&#xED; instalamos el middleware cookie-parser
+$npm install cookie-parser
+
+//y as&#xED; lo utilizamos
+var express = require(&apos;express&apos;)
+var app = express()
+var cookieParser = require(&apos;cookie-parser&apos;)
+
+app.use(cookieParser())
+</code></pre>
                                 
                                 </section>
                             
@@ -212,10 +310,14 @@
 
             
                 
-                <a href="../cap2/cap2.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Capitulo 2: CAP2">
+                <a href="../cap2/cap2.html" class="navigation navigation-prev " aria-label="Previous page: Capitulo 2: CAP2">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
+                
+                <a href="../cap4/cap4.html" class="navigation navigation-next " aria-label="Next page: Capitulo 4: Router API">
+                    <i class="fa fa-angle-right"></i>
+                </a>
                 
             
         
@@ -224,7 +326,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Capitulo 3: CAP3","level":"1.4","depth":1,"previous":{"title":"Capitulo 2: CAP2","level":"1.3","depth":1,"path":"cap2/cap2.md","ref":"cap2/cap2.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"cap3/cap3.md","mtime":"2017-03-02T18:42:35.287Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-03-02T19:25:14.811Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Capitulo 3: Middleware","level":"1.4","depth":1,"next":{"title":"Capitulo 4: Router API","level":"1.5","depth":1,"path":"cap4/cap4.md","ref":"cap4/cap4.md","articles":[]},"previous":{"title":"Capitulo 2: CAP2","level":"1.3","depth":1,"path":"cap2/cap2.md","ref":"cap2/cap2.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"cap3/cap3.md","mtime":"2017-03-03T02:11:19.347Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-03-03T02:16:18.617Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
