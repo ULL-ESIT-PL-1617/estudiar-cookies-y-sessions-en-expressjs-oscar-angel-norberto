@@ -1,4 +1,6 @@
-# Apuntes
+# Introducción
+
+Apuntes sobre Cookies y Sessions en ExpressJS.
 
 Autores:
 
@@ -9,3 +11,5 @@ Norberto García Gazpar http://alu0100611519.github.io/
 Ángel Alberto Hamilton López http://alu0100888102.github.io/
 
 
+
+![](/cookiesSessions/assets/cookies.jpeg)
