@@ -1,14 +1,14 @@
-# **Rutas en ExpressJS.**
+# **Apuntes.**
 
-> *Elaboracion de un libro sobre las rutas en expressJS*
+> *Nueva elaboracion de un libro sobre cookies*
 
 #### Repositorio de la organizacion(issues,proyecto,ghpages):  
 
-- [github](https://github.com/ULL-ESIT-PL-1617/estudiar-las-rutas-en-expressjs-angel-oscar-norberto.git)
-- [gh-pages](https://ull-esit-pl-1617.github.io/estudiar-las-rutas-en-expressjs-angel-oscar-norberto/)
-- [Heroku](https://sleepy-inlet-32220.herokuapp.com/)
-- [gitbook.com](https://alu0100825893.gitbooks.io/express/content/)
-- [Descripción de la práctica](https://casianorodriguezleon.gitbooks.io/ull-esit-1617/practicas/practicalearningrouting.html)
+- [github](https://github.com/ULL-ESIT-PL-1617/estudiar-cookies-y-sessions-en-expressjs-oscar-angel-norberto.git)
+- [gh-pages](https://ull-esit-pl-1617.github.io/estudiar-cookies-y-sessions-en-expressjs-oscar-angel-norberto/)
+- [Heroku](https://peaceful-shore-93852.herokuapp.com/)
+- [gitbook.com](https://alu0100825893.gitbooks.io/cookies/content/cookiesSessions/)
+- [Descripción de la práctica](https://casianorodriguezleon.gitbooks.io/ull-esit-1617/content/practicas/practicalearningcookies.html)
 - [Aula virtual de la asignatura](https://campusvirtual.ull.es/1617/course/view.php?id=1148)
 
 #### Participantes
