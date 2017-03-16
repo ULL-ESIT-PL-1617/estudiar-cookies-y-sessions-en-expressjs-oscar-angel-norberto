@@ -20,7 +20,7 @@
 
 * ExpressJS. Cookies y sessions
     * [Introducción](cookiesSessions/README.md)
-    * [Capitulo 1: ](cookiesSessions/cap1/cap1.md)
+    * [Capitulo 1: HTTP Cookie](cookiesSessions/cap1/cap1.md)
     * [Capitulo 2: Módulo cookie](cookiesSessions/cap2/cap2.md)
-    * [Capitulo 3: ](cookiesSessions/cap3/cap3.md)
-    * [Capitulo 4: ](cookiesSessions/cap4/cap4.md)
+    * [Capitulo 3: Cookie en ExpressJS](cookiesSessions/cap3/cap3.md)
+    * [Capitulo 4: Query String](cookiesSessions/cap4/cap4.md)

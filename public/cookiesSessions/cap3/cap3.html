@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Capitulo 3:  · GitBook</title>
+        <title>Capitulo 3: Cookie en ExpressJS · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.2">
@@ -354,7 +354,7 @@
                 <a href="../cap1/cap1.html">
             
                     
-                    Capitulo 1: 
+                    Capitulo 1: HTTP Cookie
             
                 </a>
             
@@ -380,7 +380,7 @@
                 <a href="cap3.html">
             
                     
-                    Capitulo 3: 
+                    Capitulo 3: Cookie en ExpressJS
             
                 </a>
             
@@ -393,7 +393,7 @@
                 <a href="../cap4/cap4.html">
             
                     
-                    Capitulo 4: 
+                    Capitulo 4: Query String
             
                 </a>
             
@@ -436,7 +436,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="../.." >Capitulo 3: </a>
+        <a href="../.." >Capitulo 3: Cookie en ExpressJS</a>
     </h1>
 </div>
 
@@ -451,8 +451,46 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <p>CAP 3</p>
-
+                                <h1 id="uso-de-cookies-en-express">Uso de cookies en express</h1>
+<p>Para usar cookies es express podemos usar el middleware <strong>cookie-parser</strong>. &#xC9;ste nos analiza la cabecera de los cookies y las extrae para guardarlos en el campo <strong>req.cookies</strong> del objeto  que contiene una petici&#xF3;n. Su instalaci&#xF3;n es a trav&#xE9;s de npm:</p>
+<blockquote>
+<p>npm install cookie-parser --save</p>
+</blockquote>
+<p>Su activaci&#xF3;n es como cualquier middleware:</p>
+<blockquote>
+<p>var cookieParser = require(&apos;cookie-parser&apos;);</p>
+<p>app.use(cookieParser());</p>
+</blockquote>
+<p>Para crear un cookie podemos simplemente usar <strong>res.cookie(nombre, valor [, opciones])</strong>, que esperar&#xE1;:</p>
+<ul>
+<li>El nombre que se le dar&#xE1; al cookie</li>
+<li>El valor que tendr&#xE1; el cookie</li>
+<li>Y opciones adicionales:<ul>
+<li>domain</li>
+<li>encode</li>
+<li>expires</li>
+<li>httpOnly</li>
+<li>maxAge</li>
+<li>path</li>
+<li>secure</li>
+<li>signed</li>
+<li>sameSite</li>
+</ul>
+</li>
+</ul>
+<p>Una vez creado un cookie, se puede comprobar su existencia desde el cliente a trav&#xE9;s de <strong>document.cookie</strong>.</p>
+<p>Para borrar un cookie tenemos la funci&#xF3;n <strong>clearCookie(nombreCookie)</strong>. A continuaci&#xF3;n podemos ver como se usan todas estas funcionalidades a trav&#xE9;s del ejemplo <code>ejemploExpressCookie.js</code>.</p>
+<p>En este ejemplo podemos ver que cookies tenemos en la sesi&#xF3;n actual, adem&#xE1;s de poder crear y borralos.</p>
+<p>La primera vez que accedamos veremos un objeto que contiene los cookies que en este caso estar&#xE1; vac&#xED;o.</p>
+<p><img src="../assets/cookieParser1.png" alt=""></p>
+<p>Para crear un cookie tendremos que acceder a la ruta crear <code>/crear/nombreCookie</code>, que crear&#xE1; un cookie con el nombre que queramos y estar&#xE1; disponible durante 60 segundos. Una vez creado con por ejemplo, <code>/crear/miCookie</code>, se nos redirigir&#xE1; a la ruta principal y veremos que el objeto que contiene los cookies ahora no esta vac&#xED;o.</p>
+<p><img src="../assets/cookieParser2.png" alt=""></p>
+<p>Esto es realizado a trav&#xE9;s de:</p>
+<pre><code>res.cookie(req.params.cookie , &apos;cookie_datos&apos;, {maxAge : 1000 * 60} //60 segundos
+</code></pre><p>   ).redirect(&apos;/&apos;);</p>
+<p>Para eliminar un cookie podemos acceder a <code>/borrar/nombreCookie</code> y para ello se ejecuta:</p>
+<pre><code>res.clearCookie(req.params.cookie);
+</code></pre>
                                 
                                 </section>
                             
@@ -484,7 +522,7 @@
                 </a>
                 
                 
-                <a href="../cap4/cap4.html" class="navigation navigation-next " aria-label="Next page: Capitulo 4: ">
+                <a href="../cap4/cap4.html" class="navigation navigation-next " aria-label="Next page: Capitulo 4: Query String">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -495,7 +533,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Capitulo 3: ","level":"1.4.4","depth":2,"next":{"title":"Capitulo 4: ","level":"1.4.5","depth":2,"path":"cookiesSessions/cap4/cap4.md","ref":"cookiesSessions/cap4/cap4.md","articles":[]},"previous":{"title":"Capitulo 2: Módulo cookie","level":"1.4.3","depth":2,"path":"cookiesSessions/cap2/cap2.md","ref":"cookiesSessions/cap2/cap2.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"cookiesSessions/cap3/cap3.md","mtime":"2017-03-14T23:20:16.561Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-03-16T07:30:39.852Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Capitulo 3: Cookie en ExpressJS","level":"1.4.4","depth":2,"next":{"title":"Capitulo 4: Query String","level":"1.4.5","depth":2,"path":"cookiesSessions/cap4/cap4.md","ref":"cookiesSessions/cap4/cap4.md","articles":[]},"previous":{"title":"Capitulo 2: Módulo cookie","level":"1.4.3","depth":2,"path":"cookiesSessions/cap2/cap2.md","ref":"cookiesSessions/cap2/cap2.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"cookiesSessions/cap3/cap3.md","mtime":"2017-03-16T22:22:00.134Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-03-16T22:24:42.212Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
