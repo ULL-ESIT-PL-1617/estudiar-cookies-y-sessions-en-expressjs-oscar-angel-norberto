@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Capitulo 2:  · GitBook</title>
+        <title>Capitulo 2: Módulo cookie · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.2">
@@ -367,7 +367,7 @@
                 <a href="cap2.html">
             
                     
-                    Capitulo 2: 
+                    Capitulo 2: Módulo cookie
             
                 </a>
             
@@ -381,6 +381,19 @@
             
                     
                     Capitulo 3: 
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../cap4/cap4.html">
+            
+                <a href="../cap4/cap4.html">
+            
+                    
+                    Capitulo 4: 
             
                 </a>
             
@@ -423,7 +436,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="../.." >Capitulo 2: </a>
+        <a href="../.." >Capitulo 2: Módulo cookie</a>
     </h1>
 </div>
 
@@ -438,7 +451,71 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <p>CAP 2</p>
+                                <h1 id="m&#xF3;dulo-cookie">M&#xF3;dulo cookie</h1>
+<p>El m&#xF3;dulo cookie es un analizador y serializador de cookies para servidores http.</p>
+<p>Para usar el m&#xF3;dulo es necesario guardar el m&#xF3;dulo:</p>
+<blockquote>
+<p>npm install cookie --save</p>
+</blockquote>
+<p>Para poner acceder a todas las funcionalidades del m&#xF3;dulo hay que:</p>
+<blockquote>
+<p>var cookie = require(&apos;cookie&apos;);</p>
+</blockquote>
+<p>Este m&#xF3;dulo no ofrece dos funcionalidades, parse y serialize.</p>
+<h2 id="cookieparsecadena-opciones">cookie.parse(cadena, opciones)</h2>
+<p>Analiza la cadena de una cabecera de un http cookie y devuelve el mismo transformado en un objeto con parejas de campo-valor de todos los cookies.</p>
+<p>Entre las opciones que acepta est&#xE1; una funci&#xF3;n(decode) que se usar&#xE1; para sacar el valor de los campos durante el analisis. Si no se pasa est&#xE1; funci&#xF3;n, la funci&#xF3;n por defecto es decodeURIComponent.</p>
+<h2 id="cookieserializenombre-valor-opciones">cookie.serialize(nombre, valor, opciones)</h2>
+<p>Permite construir un par campo-valor que ser&#xE1; serializado para la creaci&#xF3;n de un cookie con Set-Cookie.</p>
+<ul>
+<li>domain: Valor del dominio del cookie. Por defecto ser&#xE1; el dominio actual.</li>
+<li>encode: Funci&#xF3;n que ser&#xE1; usada para codificar el valor d eun cookie.Por defecto ser&#xE1; ecodeURIComponent.</li>
+<li>expires: La fecha de destruci&#xF3;n del cookie. Por defecto ser&#xE1; cuando se cierre el navegador.</li>
+<li>httpOnly: Valor que no permite al cliente javascript acceder a los cookies desde document.cookie cuando es verdadero. Por defecto es falso.</li>
+<li>maxAge: N&#xFA;mero entero de segundos durante los que el cookie no se destruir&#xE1;.</li>
+<li>path: Ruta que debe existir en la fuente a la que se envia la petici&#xF3;n.</li>
+<li>sameSite:<ul>
+<li>true: Estricto uso del mismo sitio.</li>
+<li>false: No requerido el mismo sitio.</li>
+<li>&apos;lax&apos;: Suave uso del mismo sitio.</li>
+<li>&apos;strict&apos;: Estricto uso del mismo sitio.</li>
+</ul>
+</li>
+<li>secure: Los clientes no envian a los servidores los cookies si la conexion no es segura(https) cuando se este valor es verdadero. Por defecto es falso.</li>
+</ul>
+<h2 id="ejemplo">Ejemplo</h2>
+<p>En el fichero <strong>ejemploCookie.js</strong> podemos ver el m&#xF3;dulo en uso con un servidor http. Este ejemplo muestra un formulario en el lado del cliente en el que puede introducir un nombre y enviarlo.</p>
+<p>Cuando accedemos al la raiz por primera vez veremos en el servidor:</p>
+<pre><code>URL: &apos;/?name=&apos;
+URL analizada:{ name: &apos;&apos;}
+cookie no analizado: undefined
+cookie analizado: {}
+URL: &apos;/favicon.ico&apos;
+URL analizada:{}
+cookie no analizado: undefined
+cookie analizado: {}
+</code></pre><p>Como vemos, en la primera petici&#xF3;n no hay ning&#xFA;n cookie guardado y la url pasa un par&#xE1;metro vacio. Los cookies se analizan, pero como no hay el objeto es vac&#xED;o.</p>
+<pre><code>var cookies = cookie.parse(req.headers.cookie || &apos;&apos;);
+</code></pre><p>Si el cliente envia un nombre, por ejemplo usuario:</p>
+<p><img src="../assets/formulario.png" alt=""></p>
+<pre><code>URL: &apos;/?name=usuario&apos;
+URL analizada:{ name: &apos;usuario&apos; }
+URL: &apos;/?name=&apos;
+URL analizada:{ name: &apos;&apos; }
+cookie no analizado: &apos;name=usuario&apos;
+cookie analizado: { name: &apos;usuario&apos; }
+URL: &apos;/favicon.ico&apos;
+URL analizada:{}
+cookie no analizado: &apos;name=usuario&apos;
+cookie analizado: { name: &apos;usuario&apos; }
+</code></pre><p>Ahora la url ya no tiene un par&#xE1;metro vacio y se env&#xED;a un Cookie al cliente a partir del par&#xE1;metro:</p>
+<pre><code>res.setHeader(&apos;Set-Cookie&apos;, cookie.serialize(&apos;name&apos;, String(query.name), {
+  httpOnly: true,
+  maxAge: 10 // 10 segundos
+}));
+</code></pre><p>El cliente quedar&#xED;a ahora como:</p>
+<p><img src="../assets/conocido.png" alt=""></p>
+<p>Y si refrescamos la p&#xE1;gina antes de 10 segundos, se nos seguir&#xE1; reconociendo como usuario. Despu&#xE9;s de diez segundos el cookie se destruir&#xE1; y ya no se nos reconocer&#xE1;.</p>
 
                                 
                                 </section>
@@ -482,7 +559,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Capitulo 2: ","level":"1.4.3","depth":2,"next":{"title":"Capitulo 3: ","level":"1.4.4","depth":2,"path":"cookiesSessions/cap3/cap3.md","ref":"cookiesSessions/cap3/cap3.md","articles":[]},"previous":{"title":"Capitulo 1: ","level":"1.4.2","depth":2,"path":"cookiesSessions/cap1/cap1.md","ref":"cookiesSessions/cap1/cap1.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"cookiesSessions/cap2/cap2.md","mtime":"2017-03-14T23:20:05.697Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-03-15T18:08:13.705Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Capitulo 2: Módulo cookie","level":"1.4.3","depth":2,"next":{"title":"Capitulo 3: ","level":"1.4.4","depth":2,"path":"cookiesSessions/cap3/cap3.md","ref":"cookiesSessions/cap3/cap3.md","articles":[]},"previous":{"title":"Capitulo 1: ","level":"1.4.2","depth":2,"path":"cookiesSessions/cap1/cap1.md","ref":"cookiesSessions/cap1/cap1.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"cookiesSessions/cap2/cap2.md","mtime":"2017-03-16T07:23:44.133Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-03-16T07:30:39.852Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>

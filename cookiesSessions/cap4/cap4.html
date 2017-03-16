@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Capitulo 2: Direccionamiento · GitBook</title>
+        <title>Capitulo 4:  · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.2">
@@ -57,10 +57,8 @@
     <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="../cap3/cap3.html" />
     
-    
-    <link rel="prev" href="../cap1/cap1.html" />
+    <link rel="prev" href="../cap3/cap3.html" />
     
 
     </head>
@@ -252,9 +250,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.3.1" data-path="../">
+        <li class="chapter " data-level="1.3.1" data-path="../../rutasExpress/">
             
-                <a href="../">
+                <a href="../../rutasExpress/">
             
                     
                     Introducción
@@ -265,9 +263,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.2" data-path="../cap1/cap1.html">
+        <li class="chapter " data-level="1.3.2" data-path="../../rutasExpress/cap1/cap1.html">
             
-                <a href="../cap1/cap1.html">
+                <a href="../../rutasExpress/cap1/cap1.html">
             
                     
                     Capitulo 1: Introduccion al direccionamiento
@@ -278,9 +276,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.3.3" data-path="cap2.html">
+        <li class="chapter " data-level="1.3.3" data-path="../../rutasExpress/cap2/cap2.html">
             
-                <a href="cap2.html">
+                <a href="../../rutasExpress/cap2/cap2.html">
             
                     
                     Capitulo 2: Direccionamiento
@@ -291,9 +289,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.4" data-path="../cap3/cap3.html">
+        <li class="chapter " data-level="1.3.4" data-path="../../rutasExpress/cap3/cap3.html">
             
-                <a href="../cap3/cap3.html">
+                <a href="../../rutasExpress/cap3/cap3.html">
             
                     
                     Capitulo 3: Middleware
@@ -304,9 +302,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.5" data-path="../cap4/cap4.html">
+        <li class="chapter " data-level="1.3.5" data-path="../../rutasExpress/cap4/cap4.html">
             
-                <a href="../cap4/cap4.html">
+                <a href="../../rutasExpress/cap4/cap4.html">
             
                     
                     Capitulo 4: Router API
@@ -336,9 +334,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.4.1" data-path="../../cookiesSessions/">
+        <li class="chapter " data-level="1.4.1" data-path="../">
             
-                <a href="../../cookiesSessions/">
+                <a href="../">
             
                     
                     Introducción
@@ -349,9 +347,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.2" data-path="../../cookiesSessions/cap1/cap1.html">
+        <li class="chapter " data-level="1.4.2" data-path="../cap1/cap1.html">
             
-                <a href="../../cookiesSessions/cap1/cap1.html">
+                <a href="../cap1/cap1.html">
             
                     
                     Capitulo 1: 
@@ -362,9 +360,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.3" data-path="../../cookiesSessions/cap2/cap2.html">
+        <li class="chapter " data-level="1.4.3" data-path="../cap2/cap2.html">
             
-                <a href="../../cookiesSessions/cap2/cap2.html">
+                <a href="../cap2/cap2.html">
             
                     
                     Capitulo 2: Módulo cookie
@@ -375,9 +373,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.4" data-path="../../cookiesSessions/cap3/cap3.html">
+        <li class="chapter " data-level="1.4.4" data-path="../cap3/cap3.html">
             
-                <a href="../../cookiesSessions/cap3/cap3.html">
+                <a href="../cap3/cap3.html">
             
                     
                     Capitulo 3: 
@@ -388,9 +386,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.5" data-path="../../cookiesSessions/cap4/cap4.html">
+        <li class="chapter active" data-level="1.4.5" data-path="cap4.html">
             
-                <a href="../../cookiesSessions/cap4/cap4.html">
+                <a href="cap4.html">
             
                     
                     Capitulo 4: 
@@ -436,7 +434,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="../.." >Capitulo 2: Direccionamiento</a>
+        <a href="../.." >Capitulo 4: </a>
     </h1>
 </div>
 
@@ -451,144 +449,21 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="routing"><strong>ROUTING</strong></h1>
-<p>Hace referencia a la dfinicion de puntos finales de aplicaci&#xF3;n y c&#xF3;mo responden a las solicitudes de cliente.</p>
-<pre><code class="lang-.js">var express = require(&apos;express&apos;);
-var app = express();
-
-// respond with &quot;hello world&quot; when a GET request is made to the homepage
-app.get(&apos;/&apos;, function(req, res) {
-  res.send(&apos;hello world&apos;);
-});
-</code></pre>
-<h2 id="m&#xE9;todos-de-ruta">M&#xE9;todos de ruta</h2>
-<p>El m&#xE9;todo de ruta se deriva de uno de los m&#xE9;todos HTTP y se adjunan a una instancia de express.</p>
-<pre><code class="lang-.js">// GET method route
-app.get(&apos;/&apos;, function (req, res) {
-  res.send(&apos;GET request to the homepage&apos;);
-});
-
-// POST method route
-app.post(&apos;/&apos;, function (req, res) {
-  res.send(&apos;POST request to the homepage&apos;);
-});
-</code></pre>
-<p>Expres da soporte a los m&#xE9;todos con los m&#xE9;todos HTTP.</p>
-<p>Hay un m&#xE9;todo especial, app.all() que no deriva de ning&#xFA;n m&#xE9;todo HTTP. Este m&#xE9;todo se utiliza para cargar funciones de middleware en una v&#xED;a de acceso para todos los m&#xE9;todos de solicitud.</p>
-<pre><code class="lang-.js">app.all(&apos;/secret&apos;, function (req, res, next) {
-  console.log(&apos;Accessing the secret section ...&apos;);
-  next(); // pass control to the next handler
-});
-</code></pre>
-<h2 id="v&#xED;as-de-acceso-de-ruta">V&#xED;as de acceso de ruta</h2>
-<p>Las v&#xED;as de acceso de ruta definen los puntos finales en los que pueden realizarse las solicitudes.</p>
-<p>Este es un ejemplo de acceso a rutas.</p>
-<p><strong>Ruta raiz &apos;/&apos;</strong></p>
-<pre><code class="lang-.js">app.get(&apos;/&apos;, function (req, res) { // envio a raiz
-  res.send(&apos;root&apos;); // lo que se ele envia.
-});
-</code></pre>
-<h2 id="manejadores-de-rutas">Manejadores de rutas</h2>
-<p>Puede proporcionar varias funciones de devoluci&#xF3;n de llamada que se comportan como middleware para manejar una solicitud. La &#xFA;nica excepci&#xF3;n es que estas devoluciones de llamada pueden invocar next(&apos;route&apos;) para omitir el resto de las devoluciones de llamada de ruta. Puede utilizar este mecanismo para imponer condiciones previas en una ruta y, a continuaci&#xF3;n, pasar el control a las rutas posteriores si no hay motivo para continuar con la ruta actual.</p>
-<p>Los manejadores de rutas pueden tener la forma de una funci&#xF3;n, una matriz de funciones o combinaciones de ambas, como se muestra en los siguientes ejemplos.</p>
-<p>Mas de una funci&#xF3;n de devoluci&#xF3;n de llamada puede manejar una ruta.</p>
-<pre><code class="lang-.js">app.get(&apos;/example/b&apos;, function (req, res, next) {
-  console.log(&apos;the response will be sent by the next function ...&apos;);
-  next();
-}, function (req, res) {
-  res.send(&apos;Hello from B!&apos;);
-});
-</code></pre>
-<h2 id="m&#xE9;todos-de-respuesta">M&#xE9;todos de respuesta</h2>
-<p>Los m&#xE9;todos en el objeto de respuesta (res) de la tabla siguiente pueden enviar una respuesta al cliente y terminar el ciclo de solicitud/respuestas. Si ninguno de estos m&#xE9;todos se invoca desde un manejador de rutas, la solicitud de cliente se dejar&#xE1; colgada.</p>
-<table>
-<thead>
-<tr>
-<th><strong>M&#xE9;todo</strong></th>
-<th><strong>Descripci&#xF3;n</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>res.download()</td>
-<td>solicita un archivo para descargarlo</td>
-</tr>
-<tr>
-<td>res.end()</td>
-<td>Finaliza el proceso de respuesta</td>
-</tr>
-<tr>
-<td>res.josn()</td>
-<td>Envia una respuesta JSON</td>
-</tr>
-<tr>
-<td>res.jsonp()</td>
-<td>Env&#xED;a una respuesta JSON con soporte JSONP</td>
-</tr>
-<tr>
-<td>res.redirect()</td>
-<td>Redirecciona una solicitud</td>
-</tr>
-<tr>
-<td>res.render()</td>
-<td>Representa una plantilla de vista</td>
-</tr>
-<tr>
-<td>res.send()</td>
-<td>Env&#xED;a una respuesta de varios tipos.</td>
-</tr>
-<tr>
-<td>res.sendfile()</td>
-<td>Env&#xED;a un archivo como una secuencia de octetos</td>
-</tr>
-<tr>
-<td>res.sendStatus()</td>
-<td>Establece el c&#xF3;digo de la respuesta y env&#xED;a su representaci&#xF3;n de serie como el cuerpo de respuesta</td>
-</tr>
-</tbody>
-</table>
-<h2 id="approute">app.route()</h2>
-<p>Puede crear manejadores de rutas encadenables para una v&#xED;a de acceso de ruta utilizando app.route(). Como la v&#xED;a de acceso se especifica en una &#xFA;nica ubicaci&#xF3;n, la creaci&#xF3;n de rutas modulares es muy &#xFA;til, al igual que la reducci&#xF3;n de redundancia y errores tipogr&#xE1;ficos. Para obtener m&#xE1;s informaci&#xF3;n sobre las rutas, consulte: Documentaci&#xF3;n de Router().</p>
-<p>A continuaci&#xF3;n, se muestra un ejemplo de manejadores de rutas encadenados que se definen utilizando app.route().</p>
-<pre><code class="lang-.js">app.route(&apos;/book&apos;)
-  .get(function(req, res) {
-    res.send(&apos;Get a random book&apos;);
-  })
-  .post(function(req, res) {
-    res.send(&apos;Add a book&apos;);
-  })
-  .put(function(req, res) {
-    res.send(&apos;Update the book&apos;);
-  });
-</code></pre>
-<h2 id="expressrouter">express.Router</h2>
-<p>Utilice la clase express.Router para crear manejadores de rutas montables y modulares. Una instancia Router es un sistema de middleware y direccionamiento completo; por este motivo, a menudo se conoce como una &#x201C;miniaplicaci&#xF3;n&#x201D;.</p>
-<p>El siguiente ejemplo crea un direccionador como un m&#xF3;dulo, carga una funci&#xF3;n de middleware en &#xE9;l, define algunas rutas y monta el m&#xF3;dulo de direccionador en una v&#xED;a de acceso en la aplicaci&#xF3;n principal.</p>
-<p>Cree un archivo de direccionador denominado hello.js en el directorio de la aplicaci&#xF3;n, con el siguiente contenido:</p>
-<pre><code class="lang-.js">var express = require(&apos;express&apos;);
-var router = express.Router();
-
-// middleware that is specific to this router
-router.use(function timeLog(req, res, next) {
-  console.log(&apos;Time: &apos;, Date.now());
-  next();
-});
-// define the home page route
-router.get(&apos;/&apos;, function(req, res) {
-  res.send(&apos;Hello home page&apos;);
-});
-// define the about route
-router.get(&apos;/about&apos;, function(req, res) {
-  res.send(&apos;About Hello&apos;);
-});
-
-module.exports = router;
-</code></pre>
-<p>A continuaci&#xF3;n, cargue el m&#xF3;dulo de direccionador en la aplicaci&#xF3;n:</p>
-<pre><code class="lang-.js">var birds = require(&apos;./birds&apos;);
-...
-app.use(&apos;/birds&apos;, birds);
-</code></pre>
+                                <h1 id="query-string">Query String</h1>
+<h3 id="&#xBF;que-son-los-query-strings">&#xBF;Que son los Query Strings?</h3>
+<p>Los Query Strings son uno de los m&#xE9;todos para transmitir informaci&#xF3;n a trav&#xE9;s de distintas p&#xE1;ginas web, utilizando para ello cadenas de caracters extra al final de las url. Un ejemplo puede ser una b&#xFA;squeda en google:</p>
+<pre><code>google.es/search?site=&amp;source=hp&amp;q=busqueda+de+ejemplo
+</code></pre><p>El texto que a partir de <code>?</code> es el Query String propiamente dicho.</p>
+<h3 id="usos">Usos</h3>
+<p>El principal uso que tienen es el de proporcionar informaci&#xF3;n adicional al destino. En el caso de que la petici&#xF3;n sea recibida por un programa, este programa puede utilizar la informaci&#xF3;n para modificar la p&#xE1;gina de forma din&#xE1;mica (las p&#xE1;ginas est&#xE1;ticas no suelen poder hacer esto y simplemente ignoran lo que halla a partir de la <code>?</code>).</p>
+<p>A dem&#xE1;s, pueden servir para proporcionar un identificador &#xFA;nico a una sesi&#xF3;n del usuario, permitiendo que se rastree sus movimientos a trav&#xE9;s de distintas p&#xE1;ginas, en lo que se conoce como &quot;Tracking&quot;. Este sistema se diferencia de las cookies en que no requiere que el cliente almacene informaci&#xF3;n, ya que simplemente se guardan como c&#xF3;digos en el url del sitio, aunque de esta manera incluso un mismo usuario que halla accedido en dos momentos distintos, o de dos formas distinas a una p&#xE1;gina ser&#xE1;n tratados como usuarios distintos. A difrencia de las cookies, no se pueden desactivar por lo que es m&#xE1;s fiable utilizar este m&#xE9;todo para hacer Tracking de sesiones individuales.</p>
+<h3 id="codificaci&#xF3;n">Codificaci&#xF3;n</h3>
+<p>Debido a ciertas restricciones con los car&#xE1;cters dentro de las url, los Query Strings han de codificarse de una manera llamada &quot;Percent-encoding&quot;:</p>
+<ul>
+<li>Los espacios se escriben <code>+</code> o <code>%20</code>.</li>
+<li>Las car&#xE1;cters alfanum&#xE9;ricos y <code>*</code>,<code>-</code>,<code>.</code> y <code>_</code> se mantienen igual.</li>
+<li>Los dem&#xE1;s caracteres se escriben como <code>%HH</code> donde HH es la codificaci&#xF3;n en hexadecimal segun UTF-8 (normalmente).</li>
+</ul>
 
                                 
                                 </section>
@@ -616,14 +491,10 @@ app.use(&apos;/birds&apos;, birds);
 
             
                 
-                <a href="../cap1/cap1.html" class="navigation navigation-prev " aria-label="Previous page: Capitulo 1: Introduccion al direccionamiento">
+                <a href="../cap3/cap3.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Capitulo 3: ">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
-                
-                <a href="../cap3/cap3.html" class="navigation navigation-next " aria-label="Next page: Capitulo 3: Middleware">
-                    <i class="fa fa-angle-right"></i>
-                </a>
                 
             
         
@@ -632,7 +503,7 @@ app.use(&apos;/birds&apos;, birds);
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Capitulo 2: Direccionamiento","level":"1.3.3","depth":2,"next":{"title":"Capitulo 3: Middleware","level":"1.3.4","depth":2,"path":"rutasExpress/cap3/cap3.md","ref":"rutasExpress/cap3/cap3.md","articles":[]},"previous":{"title":"Capitulo 1: Introduccion al direccionamiento","level":"1.3.2","depth":2,"path":"rutasExpress/cap1/cap1.md","ref":"rutasExpress/cap1/cap1.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"rutasExpress/cap2/cap2.md","mtime":"2017-03-14T20:02:50.962Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-03-16T07:30:39.852Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Capitulo 4: ","level":"1.4.5","depth":2,"previous":{"title":"Capitulo 3: ","level":"1.4.4","depth":2,"path":"cookiesSessions/cap3/cap3.md","ref":"cookiesSessions/cap3/cap3.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"cookiesSessions/cap4/cap4.md","mtime":"2017-03-16T07:14:52.554Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-03-16T07:30:39.852Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
