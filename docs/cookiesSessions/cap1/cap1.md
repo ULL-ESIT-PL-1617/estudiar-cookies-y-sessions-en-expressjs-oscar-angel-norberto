@@ -28,3 +28,57 @@ Set-Cookie: <cookie-name>=<cookie-value>
 
 Aquí, el servidor le dice al cliente que almacene una cookie (por ejemplo, aplicaciones como PHP, Node.js, Python o Ruby on Rails).
 La respuesta enviada al navegador contendrá el encabezado Set-Cookie y el navegador almacena la cookie.
+
+
+#### Session cookies
+
+La cookie creada anteriormente es una session cookie: se elminará cuando el cliente se cierre. No especifican caducidad máxima.
+Algunos navegadores web tiene habilitada la restauración de sesiones, lo que provoca que estas cookies temporales sean permanentes, como si el navegador nunca se cerrase.
+
+#### Permanent cookies
+
+Estas cookies no expiran cuando el navegador cieere , sino  que tienen una fecha especificada.
+
+`
+Set-Cookie: id=a3fWa; Expires=Wed, 21 Oct 2015 07:28:00 GMT;
+`
+
+#### Secure and HttpOnly cookies
+
+Una secure cookies sólo se enviará al servidor cuando se realice una solicitud usando SSL y el protocilo HTTP.
+Sin embargo, tengan en cuenta que la información privada nunca debe enviarse en cookies HTTP ya que todo el protocolo es inseguro y este no le ofrecerá ningún  cifrado o seguridad adicional.
+
+Para evitar ataques de secuencias de comandos entre sitios, las cookies sólo de HTTP no son accesibles a través de javascript a través de la propiedad Document.cookie, las API XMLHttpRequest y Request.
+
+
+`
+Set-Cookie: id=a3fWa; Expires=Wed, 21 Oct 2015 07:28:00 GMT; Secure; HttpOnly
+`
+
+#### Ámbito de cookies
+
+
+Las directivas de dominio y ruta definen el ámbito de la cookie, es decir, el conjunto de URL a las que se deben enviar las cookies.
+
+El dominio especifica los hosts a los que se enviará la cookie. Si no se especifica, el valor predeterminado es la parte del host de la ubicación del documento actual (pero sin incluir subdominios). Si se especifica un dominio, los subdominios siempre se incluyen.
+
+Si se establece Domain = mozilla.org, las cookies se incluyen en subdominios como developer.mozilla.org.
+
+Path indica una ruta de acceso de URL que debe existir en el recurso solicitado antes de enviar el encabezado de Cookie. El carácter% x2F ("/") se interpreta como un separador de directorios y los subdirectorios se emparejarán también.
+
+Si se establece Path = / docs, todos estos caminos coincidirán:
+
+
+- "/docs",
+- "/docs/Web/",
+- "docs/Web/HTTP"
+
+#### Accediendo desde JavaScript usando Document.cookies
+
+
+````.js
+document.cookie = "yummy_cookie=choco";
+document.cookie = "tasty_cookie=strawberry";
+console.log(document.cookie);
+// logs "yummy_cookie=choco; tasty_cookie=strawberry"
+````
