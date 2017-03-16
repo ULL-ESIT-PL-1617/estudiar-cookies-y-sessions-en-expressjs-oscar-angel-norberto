@@ -12,3 +12,12 @@ gulp.task('ejemploModuloCookie', function(cb){
 		cb(err);
 	});
 }); 
+
+gulp.task('ejemploExpressCookie', function(cb){
+	console.log("Puerto 8080");
+	exec('node ejemplosCookies/ejemploExpressCookie.js',function(err, stdout, stderr){
+		console.log(stdout);
+		console.log(stderr);
+		cb(err);
+	});
+}); 
